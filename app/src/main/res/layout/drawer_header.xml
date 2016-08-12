@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="190dp"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/img_header"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:contentDescription="abstract_image"
+        android:scaleType="centerCrop"
+        android:src="@drawable/abstract_img" />
+
+    <TextView
+        android:id="@+id/song_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/artist"
+        android:layout_alignLeft="@+id/img_header"
+        android:layout_alignStart="@+id/img_header"
+        android:gravity="left"
+        android:paddingLeft="4dp"
+        android:paddingBottom="4dp"
+        android:text="Song Name"
+        android:textColor="#FFF"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/song_name"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/song_name"
+        android:layout_marginBottom="8dp"
+        android:gravity="left"
+        android:paddingLeft="4dp"
+        android:text="Song Artist"
+        android:textColor="#fff"
+        android:textSize="14sp" />
+</RelativeLayout>
