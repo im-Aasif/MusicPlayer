@@ -13,7 +13,7 @@
     <string name="player">Audio Player</string>
     <string name="next">Next</string>
     <string name="open_playlist">Open Playlist</string>
-    <string name="idle">Idle</string>
+    <string name="idle">Song Name</string>
     <string name="empty_text">Select song from below to play</string>
     <string name="player_button">Album Art Screen</string>
     <color name="orange">#ff3d00</color>

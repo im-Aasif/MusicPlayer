@@ -44,7 +44,7 @@
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
                 android:textColor="#C0C0C0"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout

@@ -1,6 +1,8 @@
 package com.nerdcheck.musicplayer.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +15,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.target.ImageViewTarget;
 import com.nerdcheck.musicplayer.R;
 
 import com.nerdcheck.musicplayer.model.Song;
@@ -43,13 +49,16 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
     public void onBindViewHolder(SongViewHolder holder, int position) {
         Song currSong = songsList.get(position);
 
-        Glide.with(context).load(currSong.getAlbumArt())
+        Glide
+                .with(context)
+                .load(currSong.getAlbumArt())
                 .placeholder(R.drawable.album_art_placeholder)
                 .error(R.drawable.album_art_placeholder)
-                .crossFade()
-                .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
                 .into(holder.songThumbnail);
+
+        //holder.songThumbnail.setImageBitmap(currSong.getAlbumArt());
 
         String title = checkStringLength(currSong.getTitle());
         holder.songName.setText(title);

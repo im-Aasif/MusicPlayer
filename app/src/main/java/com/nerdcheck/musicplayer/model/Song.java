@@ -1,20 +1,24 @@
 package com.nerdcheck.musicplayer.model;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+
 public class Song {
     Long id;
-    String title, artist, album, displayName, composer, albumArt;
+    String title, artist, album, albumId, displayName, composer;
+    Uri albumArt;
 
     public Song() {
     }
 
-    public Song(Long id, String title, String artist, String album, String displayName) {
+    public Song(Long id, String title, String artist, String album, String displayName, String composer, Uri albumArt) {
         this.id = id;
         this.title = title;
         this.artist = artist;
         this.album = album;
         this.displayName = displayName;
-//        this.composer = composer;
-//        this.albumArt = albumArt;
+        this.composer = composer;
+        this.albumArt = albumArt;
     }
 
     public Long getId() {
@@ -65,11 +69,11 @@ public class Song {
         this.composer = composer;
     }
 
-    public String getAlbumArt() {
+    public Uri getAlbumArt() {
         return albumArt;
     }
 
-    public void setAlbumArt(String albumArt) {
+    public void setAlbumArt(Uri albumArt) {
         this.albumArt = albumArt;
     }
 
