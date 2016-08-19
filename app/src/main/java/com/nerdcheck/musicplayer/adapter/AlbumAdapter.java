@@ -28,7 +28,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     @Override
     public AlbumViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.album_row, parent, false);
+                .inflate(R.layout.album_cardview_row, parent, false);
         return new AlbumViewHolder(view);
     }
 
