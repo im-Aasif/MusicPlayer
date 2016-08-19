@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.MainActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,9 +27,23 @@
         <service
             android:name=".service.MusicService"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="true" />
 
-        <activity android:name=".activity.AudioPlayActivity"></activity>
+        <activity android:name=".activity.AudioPlayActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+
+        <receiver android:name=".helper.NotificationBroadcast" >
+            <intent-filter>
+                <action android:name="com.nerdcheck.musicplayer.delete" />
+                <action android:name="com.nerdcheck.musicplayer.pause" />
+                <action android:name="com.nerdcheck.musicplayer.next" />
+                <action android:name="com.nerdcheck.musicplayer.play" />
+                <action android:name="com.nerdcheck.musicplayer.previous" />
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

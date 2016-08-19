@@ -19,6 +19,13 @@ import java.util.ArrayList;
 
 public class MusicService extends Service implements MediaPlayer.OnErrorListener,
         MediaPlayer.OnCompletionListener, MediaPlayer.OnPreparedListener {
+
+    public static final String NOTIFY_PREVIOUS = "com.nerdcheck.musicplayer.previous";
+    public static final String NOTIFY_DELETE = "com.nerdcheck.musicplayer.delete";
+    public static final String NOTIFY_PAUSE = "com.nerdcheck.musicplayer.pause";
+    public static final String NOTIFY_PLAY = "com.nerdcheck.musicplayer.play";
+    public static final String NOTIFY_NEXT = "com.nerdcheck.musicplayer.next";
+
     private MediaPlayer player;
     private ArrayList<Song> songs;
     private int songPosition;

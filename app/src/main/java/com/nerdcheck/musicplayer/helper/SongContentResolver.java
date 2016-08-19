@@ -25,13 +25,13 @@ import java.util.List;
 public class SongContentResolver {
 
 
-    public static Uri getAlbumArt(Context context, Long albumId){
+    public static Uri getAlbumArt(Context context, Long albumId) {
         Bitmap bm = null, resized = null;
         String path = null;
         Uri uri = null;
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 2;
-        try{
+        try {
             final Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
             uri = ContentUris.withAppendedId(sArtworkUri, albumId);
             /*ParcelFileDescriptor pfd = context.getContentResolver().openFileDescriptor(uri, "r");
@@ -42,10 +42,11 @@ public class SongContentResolver {
                 pfd = null;
                 fd = null;
             }*/
+        } catch (Exception e) {
         }
-        catch (Exception e) {}
         return uri;
     }
+
     public static void getSongList(ArrayList<Song> songsList, Context context) {
         ContentResolver musicResolver = context.getContentResolver();
         Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
@@ -61,9 +62,12 @@ public class SongContentResolver {
                 int albumColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM);
                 int composerColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.COMPOSER);
                 int albumIdColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
+                int dataColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.DATA);
+
 
 
                 do {
+                    Song song = new Song();
                     long thisId = musicCursor.getLong(idColumn);
                     String thisTitle = musicCursor.getString(titleColumn);
                     String thisArtist = musicCursor.getString(artistColumn);
@@ -73,13 +77,14 @@ public class SongContentResolver {
                     Long thisAlbumId = musicCursor.getLong(albumIdColumn);
                     Uri thisAlbumArtPath = getAlbumArt(context, thisAlbumId);
                     //Log.e("Music Cursor value", thisId + "\n" + thisTitle + "\n" + thisArtist + "\n" + thisAlbum + "\n" + thisDisplayName + "\n" +thisAlbumId+ "\n" +thisAlbumArt);
-                    if (thisComposer != null && thisComposer.length() > 0) {
-                        songsList.add(new Song(thisId, thisTitle, thisArtist, thisAlbum, thisDisplayName, thisComposer, thisAlbumArtPath));
-                    }
-                    else{
-                        thisComposer = "<Unknown>";
-                        songsList.add(new Song(thisId, thisTitle, thisArtist, thisAlbum, thisDisplayName, thisComposer, thisAlbumArtPath));
-                    }
+                    song.setTitle(thisTitle);
+                    song.setId(thisId);
+                    song.setArtist(thisArtist);
+                    song.setAlbum(thisAlbum);
+                    song.setDisplayName(thisDisplayName);
+                    song.setAlbumArt(thisAlbumArtPath);
+                    song.setComposer(thisComposer != null && thisComposer.length() > 0 ? thisComposer : "<Unknown>");
+                    songsList.add(song);
                 } while (musicCursor.moveToNext());
             }
 
