@@ -8,27 +8,24 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.nerdcheck.musicplayer.R;
-import com.nerdcheck.musicplayer.adapter.AlbumAdapter;
 import com.nerdcheck.musicplayer.adapter.ArtistAdapter;
-import com.nerdcheck.musicplayer.adapter.SongsAdapter;
 import com.nerdcheck.musicplayer.helper.ClickListener;
 import com.nerdcheck.musicplayer.helper.DividerItemDecoration;
 import com.nerdcheck.musicplayer.helper.RecyclerTouchListener;
 import com.nerdcheck.musicplayer.helper.SongContentResolver;
 import com.nerdcheck.musicplayer.model.Artist;
-import com.nerdcheck.musicplayer.model.Song;
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.ArrayList;
 
 public class ArtistsFragment extends Fragment {
-    private RecyclerView recyclerView;
+    private FastScrollRecyclerView recyclerView;
+    //    private RecyclerView recyclerView;
     private Context context;
     private ArrayList<Artist> artistList = new ArrayList<>();
     private ArtistAdapter artistAdapter;
@@ -44,7 +41,8 @@ public class ArtistsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_artists, container, false);
-        recyclerView = (RecyclerView)view.findViewById(R.id.artists_recycler);
+        recyclerView = (FastScrollRecyclerView) view.findViewById(R.id.artists_recycler);
+
         SongContentResolver.getArtistsList(artistList,getContext());
         artistAdapter = new ArtistAdapter(artistList,getContext());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -52,6 +50,7 @@ public class ArtistsFragment extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(artistAdapter);
+
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {

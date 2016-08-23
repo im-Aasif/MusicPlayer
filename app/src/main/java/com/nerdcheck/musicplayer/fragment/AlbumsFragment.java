@@ -6,23 +6,19 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.nerdcheck.musicplayer.R;
 import com.nerdcheck.musicplayer.adapter.AlbumAdapter;
-import com.nerdcheck.musicplayer.adapter.SongsAdapter;
 import com.nerdcheck.musicplayer.helper.ClickListener;
-import com.nerdcheck.musicplayer.helper.DividerItemDecoration;
 import com.nerdcheck.musicplayer.helper.RecyclerTouchListener;
 import com.nerdcheck.musicplayer.helper.SongContentResolver;
 import com.nerdcheck.musicplayer.model.Album;
-import com.nerdcheck.musicplayer.model.Artist;
-import com.nerdcheck.musicplayer.model.Song;
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.ArrayList;
 
@@ -30,7 +26,9 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class AlbumsFragment extends Fragment {
-    private RecyclerView recyclerView;
+
+    //private RecyclerView recyclerView;
+    private FastScrollRecyclerView recyclerView;
     private Context context;
     private ArrayList<Album> albumsList = new ArrayList<>();
     private AlbumAdapter albumAdapter;
@@ -45,13 +43,15 @@ public class AlbumsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_albums, container, false);
-        recyclerView = (RecyclerView)view.findViewById(R.id.albums_recycler);
+        recyclerView = (FastScrollRecyclerView) view.findViewById(R.id.albums_recycler);
+
         SongContentResolver.getAlbumList(albumsList,getContext());
         albumAdapter = new AlbumAdapter(albumsList,getContext());
-        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(albumAdapter);
+
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {

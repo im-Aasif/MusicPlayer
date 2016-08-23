@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -19,10 +18,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.nerdcheck.musicplayer.R;
-import com.nerdcheck.musicplayer.activity.MainActivity;
 import com.nerdcheck.musicplayer.adapter.SongsAdapter;
 import com.nerdcheck.musicplayer.helper.ClickListener;
 import com.nerdcheck.musicplayer.helper.DividerItemDecoration;
@@ -30,19 +27,39 @@ import com.nerdcheck.musicplayer.helper.RecyclerTouchListener;
 import com.nerdcheck.musicplayer.helper.SongContentResolver;
 import com.nerdcheck.musicplayer.model.Song;
 import com.nerdcheck.musicplayer.service.MusicService;
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SongsFragment extends Fragment {
 
-    private RecyclerView recyclerView;
+    //private RecyclerView recyclerView;
+    private FastScrollRecyclerView recyclerView;
+
     private Context context;
     private ArrayList<Song> songsList = new ArrayList<>();
     private SongsAdapter songsAdapter;
     private MusicService musicService;
     private Intent playIntent;
     private Boolean musicBound = false;
+    public ServiceConnection musicConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            MusicService.MusicBinder binder = (MusicService.MusicBinder) iBinder;
+            musicService = binder.getService(); //Get Service
+            musicService.setList(songsList); //Get Songs List
+            musicBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            musicBound = false;
+        }
+    };
+
+    public SongsFragment() {
+
+    }
 
     @Override
     public void onDestroyView() {
@@ -50,16 +67,12 @@ public class SongsFragment extends Fragment {
         songsList.clear();
     }
 
-    public SongsFragment() {
-
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_songs, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.song_recycler);
+        recyclerView = (FastScrollRecyclerView) view.findViewById(R.id.song_recycler);
+
         SongContentResolver.getSongList(songsList, getContext());
         songsAdapter = new SongsAdapter(songsList, getContext());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -67,6 +80,7 @@ public class SongsFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(songsAdapter);
+
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new ClickListener() {
             @Override
@@ -87,22 +101,6 @@ public class SongsFragment extends Fragment {
         }));
         return view;
     }
-
-
-    public ServiceConnection musicConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            MusicService.MusicBinder binder = (MusicService.MusicBinder) iBinder;
-            musicService = binder.getService(); //Get Service
-            musicService.setList(songsList); //Get Songs List
-            musicBound = true;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-            musicBound = false;
-        }
-    };
 
     @Override
     public void onStart() {

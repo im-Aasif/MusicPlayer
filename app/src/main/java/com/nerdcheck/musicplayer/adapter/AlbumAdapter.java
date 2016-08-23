@@ -1,6 +1,7 @@
 package com.nerdcheck.musicplayer.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +13,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.nerdcheck.musicplayer.R;
 import com.nerdcheck.musicplayer.model.Album;
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.ArrayList;
 
-public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>{
+public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>
+        implements FastScrollRecyclerView.SectionedAdapter {
 
     private ArrayList<Album> albumList = new ArrayList<>();
     private Context context;
@@ -63,6 +66,13 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     @Override
     public int getItemCount() {
         return albumList.size();
+    }
+
+    @NonNull
+    @Override
+    public String getSectionName(int position) {
+        Album currAlbum = albumList.get(position);
+        return currAlbum.getTitle().substring(0, 1);
     }
 
     public class AlbumViewHolder extends RecyclerView.ViewHolder{

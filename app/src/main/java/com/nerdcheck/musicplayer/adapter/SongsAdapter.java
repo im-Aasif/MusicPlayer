@@ -1,8 +1,7 @@
 package com.nerdcheck.musicplayer.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,20 +14,16 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
-import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.target.ImageViewTarget;
 import com.nerdcheck.musicplayer.R;
-
 import com.nerdcheck.musicplayer.model.Song;
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.ArrayList;
 
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHolder> {
+public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHolder>
+        implements FastScrollRecyclerView.SectionedAdapter {
 
     private ArrayList<Song> songsList = new ArrayList<>();
     private Context context;
@@ -99,6 +94,13 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
     @Override
     public int getItemCount() {
         return songsList.size();
+    }
+
+    @NonNull
+    @Override
+    public String getSectionName(int position) {
+        Song currSong = songsList.get(position);
+        return currSong.getTitle().substring(0, 1);
     }
 
     public class SongViewHolder extends RecyclerView.ViewHolder {
