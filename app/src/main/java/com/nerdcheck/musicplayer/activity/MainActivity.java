@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_with_nav_view);
+        setContentView(R.layout.activity_main_with_slidinguppanel);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 tabTextView.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
                 tabTextView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
                 tabTextView.setText(tab.getText());
+                tabTextView.setTextColor(getResources().getColor(android.R.color.white));
                 // First tab is the selected tab, so if i==0 then set BOLD typeface
                 if (i == 0) {
                     tabTextView.setTypeface(null, Typeface.BOLD);

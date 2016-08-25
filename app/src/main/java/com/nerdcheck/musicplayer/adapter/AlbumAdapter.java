@@ -83,6 +83,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
             albumArt = (ImageView)itemView.findViewById(R.id.album_img);
             albumArtist = (TextView) itemView.findViewById(R.id.artist_name);
             albumName = (TextView) itemView.findViewById(R.id.album_name);
+
         }
     }
 }

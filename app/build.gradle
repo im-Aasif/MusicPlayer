@@ -31,4 +31,6 @@ dependencies {
     compile 'com.android.support:support-v4:24.1.1'
     compile 'com.github.rubensousa:BottomSheetBuilder:1.1'
     compile 'com.simplecityapps:recyclerview-fastscroll:1.0.9'
+    compile 'com.sothree.slidinguppanel:library:3.3.0'
+    compile 'com.vstechlab.easyfonts:easyfonts:1.0.0'
 }
