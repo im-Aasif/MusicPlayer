@@ -75,9 +75,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
             super(itemView);
             artistImage = (ImageView)itemView.findViewById(R.id.artist_img);
             artistName = (TextView)itemView.findViewById(R.id.artist_name);
-
             artistAlbums = (TextView)itemView.findViewById(R.id.artist_album);
-
             artistTracks = (TextView)itemView.findViewById(R.id.artist_tracks);
 
         }

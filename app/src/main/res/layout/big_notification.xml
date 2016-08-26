@@ -52,7 +52,7 @@
                 android:gravity="center_vertical"
                 android:singleLine="true"
                 android:textColor="#C0C0C0"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -69,21 +69,21 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_margin="5dp"
-                    android:background="@drawable/ic_action_previous" />
+                    android:background="@drawable/ic_skip_previous_white_36dp" />
 
                 <Button
                     android:id="@+id/btnPause"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_margin="5dp"
-                    android:background="@drawable/ic_action_pause" />
+                    android:background="@drawable/play_arrow_black_27x27" />
 
                 <Button
                     android:id="@+id/btnPlay"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_margin="5dp"
-                    android:background="@drawable/ic_action_play"
+                    android:background="@drawable/play_arrow_black_27x27"
                     android:visibility="gone" />
 
                 <Button
@@ -91,7 +91,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_margin="5dp"
-                    android:background="@drawable/ic_action_next"/>
+                    android:background="@drawable/ic_skip_next_white_36dp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

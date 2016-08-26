@@ -70,9 +70,14 @@ public class SongsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_songs, container, false);
-        recyclerView = (FastScrollRecyclerView) view.findViewById(R.id.song_recycler);
 
+        View view = inflater.inflate(R.layout.fragment_songs, container, false);
+        initRecyclerView(view);
+        return view;
+    }
+
+    private void initRecyclerView(View view) {
+        recyclerView = (FastScrollRecyclerView) view.findViewById(R.id.song_recycler);
         SongContentResolver.getSongList(songsList, getContext());
         songsAdapter = new SongsAdapter(songsList, getContext());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -80,8 +85,6 @@ public class SongsFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(songsAdapter);
-
-
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
@@ -96,10 +99,8 @@ public class SongsFragment extends Fragment {
 
             @Override
             public void onLongClick(View view, int position) {
-
             }
         }));
-        return view;
     }
 
     @Override

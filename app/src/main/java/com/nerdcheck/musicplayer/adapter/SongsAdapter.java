@@ -112,9 +112,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
             super(itemView);
             songThumbnail = (CircleImageView) itemView.findViewById(R.id.song_image);
             songName = (TextView) itemView.findViewById(R.id.song_name);
-
             songArtist = (TextView) itemView.findViewById(R.id.song_artist);
-
             moreInfo = (ImageView) itemView.findViewById(R.id.more_info);
 
         }
